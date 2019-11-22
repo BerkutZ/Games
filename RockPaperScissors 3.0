@@ -1,0 +1,27 @@
+import random
+
+variants = ['rock', 'scissors', 'paper']
+
+player_1 = str(input("\n Player, enter your choice (rock, scissors, paper): "))
+
+player_2 = random.choice(variants)
+player_1 = player_1.lower()
+
+while player_1 != "":
+
+	if player_1 == player_2:
+		print("\n Draw! " + "Your choice: " + player_1 + "." + " Choice of computer: " + player_2 + "." + "\n")
+
+	elif player_1 == 'rock' and player_2 == 'scissors':
+		print("\n Player, your won! Your choice: " + player_1 + "." + " Choice of computer: " + player_2 + "." +"\n")
+
+	elif player_1 == 'scissors' and player_2 == 'paper':
+		print ("\n Player, your won! Your choice: " + player_1 + "." + " Choice of computer: " + player_2 + "." + "\n")
+
+	elif player_1 == 'paper' and player_2 == 'rock':
+		print("\n Player, your won! " + "Your choice: " + player_1 + "." + " Choice of computer: " + player_2 + "." + "\n")
+
+	else:
+		print("\n Your lose! " + "Your choice: " + player_1 + "." + " Choice of computer: " + player_2 + "." + "\n")
+
+	player_1 = str(input("\n Would you like to repeat? If not - click on enter. If yes - enter your choice again (rock, scissors, paper): "))
