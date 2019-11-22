@@ -1,0 +1,99 @@
+import pygame
+
+pygame.init()
+
+screen = pygame.display.set_mode([800, 600])
+pygame.display.set_caption("Smiley Pong")
+
+keep_going = True
+
+pic = pygame.image.load("CrazySmile.bmp")
+
+colorkey = pic.get_at((0, 0))
+
+pic.set_colorkey(colorkey)
+
+pygame.mixer.init()
+pop = pygame.mixer.Sound("pop.wav")
+pip = pygame.mixer.Sound("blip.wav")
+
+points = 0
+lives = 5
+
+picx = 0
+picy = 0
+pic_weight = 100
+pic_height = 100
+
+speedx = 3
+speedy = 3
+
+WHITE = (255, 255, 255)
+paddlew = 200
+paddleh = 25
+paddlex = 300
+paddley = 550
+
+BLACK = (0, 0, 0)
+timer = pygame.time.Clock()
+
+font = pygame.font.SysFont("Times", 24)
+
+while keep_going: #Игровой цикл
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			keep_going = False
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_F1:
+				points = 0
+				lives = 5
+				picx = 0
+				picy = 0
+				speedx = 5
+				speedy = 5
+
+	picx += speedx
+	picy += speedy
+
+	if picx <= 0 or picx >= 700:
+		speedx = -speedx * 1.1
+	if picy <= 0:
+		speedy = -speedy + 1
+	if picy >= 500:
+		lives -= 1
+		speedy = -5
+		speedx = 5
+		picy = 499
+		pip.play()
+
+	screen.fill(BLACK)
+	screen.blit(pic, (picx, picy))
+
+	paddlex = pygame.mouse.get_pos()[0]
+	paddlex -= paddlew/2
+	pygame.draw.rect(screen, WHITE, (paddlex, paddley, paddlew, paddleh))
+
+	if picy + pic_height >= paddley and picy + pic_height <= paddley + paddleh and speedy > 0:
+
+		if picx + pic_weight / 2 >= paddlex and picx + pic_weight / 2 <= paddlex + paddlew:
+			points += 1
+			speedy = -speedy
+			pop.play()
+
+	draw_string = "Lives: " + str(lives) + " Points: " + str(points)
+
+	if lives < 1:
+		speedx = sppedy = 0
+		draw_string = "Game over. Number of points: " + str(points)
+		draw_string += " Сlick F1 to play again"
+
+	text = font.render(draw_string, True, WHITE)
+	text_rect = text.get_rect()
+	text_rect.centerx = screen.get_rect().centerx
+	text_rect.y = 10
+	screen.blit(text, text_rect)
+
+	pygame.display.update()
+	timer.tick(60)
+
+pygame.quit() # выход 
