@@ -1,0 +1,49 @@
+import pygame
+
+pygame.init()
+
+screen = pygame.display.set_mode([800, 600])
+
+pygame.display.set_caption("Click and drag to Draw")
+
+keep_going = True
+
+RED = (200, 0, 0)
+
+GREEN = (0, 200, 0)
+
+BLUE = (0, 0, 200)
+
+radius = 10
+
+mousedown = False
+
+while keep_going:
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			keep_going = False
+
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			if pygame.mouse.get_pressed()[0]:
+				mousedown = True
+			elif pygame.mouse.get_pressed()[1]:
+				mousedown = True
+			elif pygame.mouse.get_pressed()[2]:
+				mousedown = True
+		if event.type == pygame.MOUSEBUTTONUP:
+			mousedown = False
+	if mousedown:
+		if pygame.mouse.get_pressed()[0]:
+			spot = pygame.mouse.get_pos()
+			pygame.draw.circle(screen, RED, spot, radius)
+
+		if pygame.mouse.get_pressed()[1]:
+			spot = pygame.mouse.get_pos()
+			pygame.draw.circle(screen, GREEN, spot, radius)
+
+		if pygame.mouse.get_pressed()[2]:
+			spot = pygame.mouse.get_pos()
+			pygame.draw.circle(screen, BLUE, spot, radius)
+	pygame.display.update()
+
+pygame.quit()
