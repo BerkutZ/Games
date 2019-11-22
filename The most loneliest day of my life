@@ -1,0 +1,44 @@
+import pygame
+
+import random
+
+pygame.init()
+
+screen = pygame.display.set_mode([1000, 800])
+
+keep_going = True
+
+timer = pygame.time.Clock()
+
+colors = [0]*100
+locations = [0]*100
+radius = [0]*100
+
+BLACK = (0,0,0)
+
+timer = pygame.time.Clock()
+
+for i in range(100):
+	locations[i] = (random.randint(0,1000), random.randint(0,800))
+	colors[i] = (random.randint(100, 255))
+	radius[i] = random.randint(10, 20)
+
+while keep_going:
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			keep_going = False
+
+	for i in range(100):
+		pygame.draw.circle(screen, colors[i], locations[i], radius[i])
+		new_x = locations[i][0] + 0
+		new_y = locations[i][1] + 3
+		if new_y > 800:
+			new_y -= 800
+		locations[i] = (new_x, new_y)
+		
+	pygame.display.update()
+	screen.fill(BLACK)
+	timer.tick(60)
+
+pygame.quit()
