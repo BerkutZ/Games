@@ -1,0 +1,25 @@
+import random
+
+keep_going = True
+
+while keep_going:
+
+	dice = [0, 0, 0, 0, 0]
+
+	for i in range(5):
+		dice[i] = random.randint(1,6)
+		dice_str = str(dice)
+	print("\n You fell: " + dice_str + "\n")
+
+	dice.sort()
+
+	if dice[0] == dice[4]:
+		print("\n Yangtze! \n")
+	elif (dice [0] == dice [3] or dice [1] == dice [4]):
+		print("\n You fell 4 identical numbers! \n")
+	elif (dice [0] == dice [2] or dice [1] == dice [3] or dice [2] == dice [4]):
+		print("\n You fell 3 identical numbers! \n")
+	else:
+		print("\n Alas, you are in flight \n")
+
+	keep_going = (input("\n Click on [Enter] if you want play again, or click on any else key if you want to exit") == "")
