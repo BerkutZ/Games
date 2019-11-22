@@ -1,0 +1,31 @@
+import random
+
+suits = ["spades", "diamonds", "worms", "cross"]
+
+faces = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"]
+
+keep_going = True
+
+while keep_going:
+
+	my_face = random.choice(faces)
+	my_suits = random.choice(suits)
+	your_face = random.choice(faces)
+	your_suits = random.choice(suits)
+
+	print(" \n I have " + my_face + " " + my_suits)
+
+	print(" \n You have " + your_face + " " + your_suits)
+
+	if faces.index(my_face) > faces.index(your_face):
+		print("\n I won!")
+
+	elif faces.index(my_face) < faces.index(your_face):
+		print("\n Your won!")
+
+	else:
+		print("\n Draw!")
+
+	answer = input("\n Click on [Enter] if you want play again, or click on any else key if you want to exit")
+
+	keep_going = (answer == "")
