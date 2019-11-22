@@ -1,0 +1,30 @@
+action = input("Do you want encoding or decoding? Choose (e/d): ")
+message = input("Enter your message: ")
+code_num = eval(input("Enter number until 1 to 25 for encoder your message: "))
+
+message = message.upper()
+output = ""
+
+if action == 'e':
+	for letter in message:
+		if letter.isupper():
+			value = ord(letter) + code_num
+			letter = chr(value)
+
+			if not letter.isupper():
+				value -= 26 
+				letter = chr(value)
+		output += letter
+
+else:
+	for letter in message:
+		if letter.isupper():
+			value = ord(letter) + (26 - code_num)
+			letter = chr(value)
+
+			if not letter.isupper():
+				value -= 26 
+				letter = chr(value)
+		output += letter
+
+print("Result: ", output)
